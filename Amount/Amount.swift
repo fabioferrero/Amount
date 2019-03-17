@@ -11,23 +11,23 @@ import UIKit
 public struct Amount {
     
     private let value: Decimal
-    private let currencyCode: String
+    private let currency: Currency
     
-    init(value: Decimal, currencyCode: String = .euroCurrencyCode) {
-        self.currencyCode = currencyCode
+    init(value: Decimal, currency: Currency = .default) {
+        self.currency = currency
         self.value = value.roundedValue
     }
     
-    init(value: NSNumber, currencyCode: String = .euroCurrencyCode) {
-        self.init(value: value.decimalValue, currencyCode: currencyCode)
+    init(value: NSNumber, currency: Currency = .default) {
+        self.init(value: value.decimalValue, currency: currency)
     }
     
-    init(value: Double, currencyCode: String = .euroCurrencyCode) {
-        self.init(value: Decimal(value), currencyCode: currencyCode)
+    init(value: Double, currency: Currency = .default) {
+        self.init(value: Decimal(value), currency: currency)
     }
     
     var absoluteValue: Amount {
-        return Amount(value: abs(value), currencyCode: currencyCode)
+        return Amount(value: abs(value), currency: currency)
     }
 }
 
@@ -35,41 +35,41 @@ public struct Amount {
 
 extension Amount {
     static func +(lhs: Amount, rhs: Amount) -> Amount {
-        precondition(lhs.currencyCode == rhs.currencyCode)
-        return Amount(value: lhs.value + rhs.value, currencyCode: lhs.currencyCode)
+        precondition(lhs.currency == rhs.currency)
+        return Amount(value: lhs.value + rhs.value, currency: lhs.currency)
     }
     
     static func -(lhs: Amount, rhs: Amount) -> Amount {
-        precondition(lhs.currencyCode == rhs.currencyCode)
-        return Amount(value: lhs.value - rhs.value, currencyCode: lhs.currencyCode)
+        precondition(lhs.currency == rhs.currency)
+        return Amount(value: lhs.value - rhs.value, currency: lhs.currency)
     }
     
     static func *(lhs: Amount, rhs: Amount) -> Amount {
-        precondition(lhs.currencyCode == rhs.currencyCode)
-        return Amount(value: lhs.value * rhs.value, currencyCode: lhs.currencyCode)
+        precondition(lhs.currency == rhs.currency)
+        return Amount(value: lhs.value * rhs.value, currency: lhs.currency)
     }
     
     static func /(lhs: Amount, rhs: Amount) -> Amount {
-        precondition(lhs.currencyCode == rhs.currencyCode)
-        return Amount(value: lhs.value / rhs.value, currencyCode: lhs.currencyCode)
+        precondition(lhs.currency == rhs.currency)
+        return Amount(value: lhs.value / rhs.value, currency: lhs.currency)
     }
     
     static func +=(lhs: inout Amount, rhs: Amount) -> Amount {
-        precondition(lhs.currencyCode == rhs.currencyCode)
-        lhs = Amount(value: lhs.value + rhs.value, currencyCode: lhs.currencyCode)
+        precondition(lhs.currency == rhs.currency)
+        lhs = Amount(value: lhs.value + rhs.value, currency: lhs.currency)
         return lhs
     }
 }
 
 extension Amount: Equatable {
     public static func ==(lhs: Amount, rhs: Amount) -> Bool {
-        return lhs.value == rhs.value && lhs.currencyCode == rhs.currencyCode
+        return lhs.value == rhs.value && lhs.currency == rhs.currency
     }
 }
 
 extension Amount: Comparable {
     public static func <(lhs: Amount, rhs: Amount) -> Bool {
-        precondition(lhs.currencyCode == rhs.currencyCode)
+        precondition(lhs.currency == rhs.currency)
         return lhs.value < rhs.value
     }
 }
@@ -92,7 +92,7 @@ extension Amount: ExpressibleByFloatLiteral {
 
 extension Amount: CustomStringConvertible {
     public var description: String {
-        Amount.formatter.currencyCode = currencyCode
+        Amount.formatter.currencyCode = currency.rawValue
         return Amount.formatter.string(from: value as NSDecimalNumber) ?? "Importo non valido"
     }
     
@@ -104,7 +104,7 @@ extension Amount: CustomStringConvertible {
         formatter.negativeFormat = "-0.00 ¤"
         formatter.usesGroupingSeparator = true
         formatter.groupingSize = 3
-        formatter.locale = Locale(identifier: "it_IT")
+        formatter.locale = Locale.current
         return formatter
     }()
 }
@@ -149,7 +149,6 @@ extension Amount {
 }
 
 extension Optional where Wrapped == Amount {
-    
     func attributedText(withIntegerSize integerSize: CGFloat, andCurrencySize currencySize: CGFloat, textColor: UIColor = .black) -> NSAttributedString? {
         switch self {
         case .some(let value):
@@ -180,10 +179,6 @@ extension Amount: Codable {
 }
 
 // Mark: - Uility
-
-extension String {
-    static var euroCurrencyCode: String { return "EUR" }
-}
 
 extension Decimal {
     var roundedValue: Decimal {
