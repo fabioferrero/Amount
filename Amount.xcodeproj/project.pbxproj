@@ -13,6 +13,8 @@
 		B418F820223E945A00CCDBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B418F81F223E945A00CCDBC8 /* Assets.xcassets */; };
 		B418F823223E945A00CCDBC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B418F821223E945A00CCDBC8 /* LaunchScreen.storyboard */; };
 		B418F82E223E945A00CCDBC8 /* AmountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B418F82D223E945A00CCDBC8 /* AmountTests.swift */; };
+		B4201DAD223E9663006C71D5 /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4201DAC223E9663006C71D5 /* Amount.swift */; };
+		B4201DAE223E9663006C71D5 /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4201DAC223E9663006C71D5 /* Amount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,7 @@
 		B418F829223E945A00CCDBC8 /* AmountTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmountTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B418F82D223E945A00CCDBC8 /* AmountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountTests.swift; sourceTree = "<group>"; };
 		B418F82F223E945A00CCDBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B4201DAC223E9663006C71D5 /* Amount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Amount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +82,7 @@
 			children = (
 				B418F818223E945800CCDBC8 /* AppDelegate.swift */,
 				B418F81A223E945800CCDBC8 /* ViewController.swift */,
+				B4201DAC223E9663006C71D5 /* Amount.swift */,
 				B418F81C223E945800CCDBC8 /* Main.storyboard */,
 				B418F81F223E945A00CCDBC8 /* Assets.xcassets */,
 				B418F821223E945A00CCDBC8 /* LaunchScreen.storyboard */,
@@ -199,6 +203,7 @@
 			files = (
 				B418F81B223E945800CCDBC8 /* ViewController.swift in Sources */,
 				B418F819223E945800CCDBC8 /* AppDelegate.swift in Sources */,
+				B4201DAD223E9663006C71D5 /* Amount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B418F82E223E945A00CCDBC8 /* AmountTests.swift in Sources */,
+				B4201DAE223E9663006C71D5 /* Amount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
